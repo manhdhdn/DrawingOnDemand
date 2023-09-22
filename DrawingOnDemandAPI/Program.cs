@@ -52,5 +52,6 @@ static IEdmModel GetEdmModel()
 {
     var odataBuilder = new ODataConventionModelBuilder();
     odataBuilder.EntitySet<Account>("Accounts");
+    odataBuilder.EntitySet<AccountReview>("AccountReviews");
     return odataBuilder.GetEdmModel();
 }
