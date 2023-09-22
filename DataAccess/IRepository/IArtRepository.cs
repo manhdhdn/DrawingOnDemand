@@ -13,7 +13,7 @@ namespace DataAccess.IRepository
         public List<Art> GetArts();
         public Art GetArt(Guid id);
         public void PutArt(Art art);
-        public void PostArt(Art art) => ArtDAO.SaveArt(art);
+        public void PostArt(Art art);
         public void DeleteArt(Art art);
     }
 }

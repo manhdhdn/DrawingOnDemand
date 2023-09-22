@@ -13,7 +13,7 @@ namespace DataAccess.IRepository
         public List<Attackment> GetAttackments();
         public Attackment GetAttackment(Guid id);
         public void PutAttackment(Attackment attackment);
-        public void PostAttackment(Attackment attackment) => AttackmentDAO.SaveAttackment(attackment);
+        public void PostAttackment(Attackment attackment);
         public void DeleteAttackment(Attackment attackment);
     }
 }

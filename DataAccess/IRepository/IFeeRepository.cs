@@ -13,7 +13,7 @@ namespace DataAccess.IRepository
         public List<Fee> GetFees();
         public Fee GetFee(Guid id);
         public void PutFee(Fee fee);
-        public void PostFee(Fee fee) => FeeDAO.SaveFee(fee);
+        public void PostFee(Fee fee);
         public void DeleteFee(Fee fee);
     }
 }

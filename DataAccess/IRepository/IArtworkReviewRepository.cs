@@ -13,7 +13,7 @@ namespace DataAccess.IRepository
         public List<ArtworkReview> GetArtworkReviews();
         public ArtworkReview GetArtworkReview(Guid id);
         public void PutArtworkReview(ArtworkReview artworkReview);
-        public void PostArtworkReview(ArtworkReview artworkReview) => ArtworkReviewDAO.SaveArtworkReview(artworkReview);
+        public void PostArtworkReview(ArtworkReview artworkReview);
         public void DeleteArtworkReview(ArtworkReview artworkReview);
     }
 }

@@ -13,7 +13,7 @@ namespace DataAccess.IRepository
         public List<Category> GetCategories();
         public Category GetCategory(Guid id);
         public void PutCategory(Category category);
-        public void PostCategory(Category category) => CategoryDAO.SaveCategory(category);
+        public void PostCategory(Category category);
         public void DeleteCategory(Category category);
     }
 }

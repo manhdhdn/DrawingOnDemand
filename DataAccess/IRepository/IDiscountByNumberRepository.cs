@@ -13,7 +13,7 @@ namespace DataAccess.IRepository
         public List<DiscountByNumber> GetDiscountByNumbers();
         public DiscountByNumber GetDiscountByNumber(Guid id);
         public void PutDiscountByNumber(DiscountByNumber discountByNumber);
-        public void PostDiscountByNumber(DiscountByNumber discountByNumber) => DiscountByNumberDAO.SaveDiscountByNumber(discountByNumber);
+        public void PostDiscountByNumber(DiscountByNumber discountByNumber);
         public void DeleteDiscountByNumber(DiscountByNumber discountByNumber);
     }
 }
