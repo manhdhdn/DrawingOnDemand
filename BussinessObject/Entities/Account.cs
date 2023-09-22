@@ -30,7 +30,7 @@ namespace BusinessObject.Entities
         public string Status { get; set; } = null!;
         public Guid RankId { get; set; }
 
-        public virtual Ranking Rank { get; set; } = null!;
+        public virtual Ranking? Rank { get; set; }
         public virtual Order? Order { get; set; }
         public virtual ICollection<AccountReview> AccountReviewAccounts { get; set; }
         public virtual ICollection<AccountReview> AccountReviewCreatedByNavigations { get; set; }

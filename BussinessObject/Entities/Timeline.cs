@@ -13,6 +13,6 @@ namespace BusinessObject.Entities
         public string Status { get; set; } = null!;
         public Guid RequirementId { get; set; }
 
-        public virtual Requirement Requirement { get; set; } = null!;
+        public virtual Requirement? Requirement { get; set; }
     }
 }

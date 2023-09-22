@@ -12,7 +12,7 @@ namespace BusinessObject.Entities
         public Guid ArtworkId { get; set; }
         public Guid OrderId { get; set; }
 
-        public virtual Artwork Artwork { get; set; } = null!;
-        public virtual Order Order { get; set; } = null!;
+        public virtual Artwork? Artwork { get; set; }
+        public virtual Order? Order { get; set; }
     }
 }

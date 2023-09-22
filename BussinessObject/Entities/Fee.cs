@@ -11,6 +11,6 @@ namespace BusinessObject.Entities
         public DateTime? LastModifiedDate { get; set; }
         public Guid RankId { get; set; }
 
-        public virtual Ranking Rank { get; set; } = null!;
+        public virtual Ranking? Rank { get; set; }
     }
 }

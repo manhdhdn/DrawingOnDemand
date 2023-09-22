@@ -9,6 +9,6 @@ namespace BusinessObject.Entities
         public string Image { get; set; } = null!;
         public Guid ProposalId { get; set; }
 
-        public virtual Proposal Proposal { get; set; } = null!;
+        public virtual Proposal? Proposal { get; set; } 
     }
 }

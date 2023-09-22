@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using BusinessObject.Entities;
+using Microsoft.Extensions.Configuration;
 
 namespace BusinessObject.Entities.Context
 {
@@ -45,7 +46,12 @@ namespace BusinessObject.Entities.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=(local);Initial Catalog=DrawingOnDemand;User ID=sa;Password=huumanhbmt");
+                IConfiguration configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", true, true)
+                    .Build();
+
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("DrawingOnDemand"));
             }
         }
 

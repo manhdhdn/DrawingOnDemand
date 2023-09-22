@@ -24,8 +24,8 @@ namespace BusinessObject.Entities
         public Guid CreatedBy { get; set; }
         public Guid CategoryId { get; set; }
 
-        public virtual Category Category { get; set; } = null!;
-        public virtual Account CreatedByNavigation { get; set; } = null!;
+        public virtual Category? Category { get; set; }
+        public virtual Account? CreatedByNavigation { get; set; }
         public virtual ICollection<Art> Arts { get; set; }
         public virtual ICollection<ArtworkReview> ArtworkReviews { get; set; }
         public virtual ICollection<HandOverItem> HandOverItems { get; set; }

@@ -13,7 +13,7 @@ namespace BusinessObject.Entities
         public Guid RecivedBy { get; set; }
         public Guid RequirementId { get; set; }
 
-        public virtual Account RecivedByNavigation { get; set; } = null!;
-        public virtual Requirement Requirement { get; set; } = null!;
+        public virtual Account? RecivedByNavigation { get; set; }
+        public virtual Requirement? Requirement { get; set; }
     }
 }

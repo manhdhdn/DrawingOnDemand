@@ -9,6 +9,6 @@ namespace BusinessObject.Entities
         public string Image { get; set; } = null!;
         public Guid ArtworkId { get; set; }
 
-        public virtual Artwork Artwork { get; set; } = null!;
+        public virtual Artwork? Artwork { get; set; }
     }
 }

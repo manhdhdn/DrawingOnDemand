@@ -11,7 +11,7 @@ namespace BusinessObject.Entities
         public Guid HandOverId { get; set; }
         public Guid ArtworkId { get; set; }
 
-        public virtual Artwork Artwork { get; set; } = null!;
-        public virtual HandOver HandOver { get; set; } = null!;
+        public virtual Artwork? Artwork { get; set; }
+        public virtual HandOver? HandOver { get; set; } 
     }
 }

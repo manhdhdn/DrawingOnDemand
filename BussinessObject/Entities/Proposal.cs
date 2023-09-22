@@ -19,8 +19,8 @@ namespace BusinessObject.Entities
         public Guid RequirementId { get; set; }
         public Guid CreatedBy { get; set; }
 
-        public virtual Account CreatedByNavigation { get; set; } = null!;
-        public virtual Requirement Requirement { get; set; } = null!;
+        public virtual Account? CreatedByNavigation { get; set; }
+        public virtual Requirement? Requirement { get; set; }
         public virtual ICollection<Attackment> Attackments { get; set; }
     }
 }

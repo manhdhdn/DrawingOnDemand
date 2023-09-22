@@ -13,6 +13,6 @@ namespace BusinessObject.Entities
         public string Status { get; set; } = null!;
         public Guid OrderId { get; set; }
 
-        public virtual Order Order { get; set; } = null!;
+        public virtual Order? Order { get; set; }
     }
 }
