@@ -52,5 +52,11 @@ static IEdmModel GetEdmModel()
 {
     var odataBuilder = new ODataConventionModelBuilder();
     odataBuilder.EntitySet<Account>("Accounts");
+    odataBuilder.EntitySet<Payment>("Payments");
+    odataBuilder.EntitySet<OrderDetail>("OrderDetails");
+    odataBuilder.EntitySet<Order>("Orders");
+    odataBuilder.EntitySet<Invite>("Invites");
+    odataBuilder.EntitySet<HandOverItem>("HandOverItems");
+    odataBuilder.EntitySet<HandOver>("HandOvers");
     return odataBuilder.GetEdmModel();
 }
