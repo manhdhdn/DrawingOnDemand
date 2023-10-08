@@ -12,10 +12,12 @@ namespace BusinessObject.Entities
 
         public Guid Id { get; set; }
         public string Name { get; set; } = null!;
-        public decimal TotaIncome { get; set; }
-        public decimal TotalSpend { get; set; }
+        public decimal IncomeRequire { get; set; }
+        public decimal SpendRequire { get; set; }
+        public double Fee { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
 
-        public virtual Fee? Fee { get; set; }
         public virtual ICollection<Account> Accounts { get; set; }
     }
 }
