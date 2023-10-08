@@ -52,6 +52,12 @@ static IEdmModel GetEdmModel()
 {
     var odataBuilder = new ODataConventionModelBuilder();
     odataBuilder.EntitySet<Account>("Accounts");
+    odataBuilder.EntitySet<Proposal>("Proposals");
+    odataBuilder.EntitySet<Ranking>("Rankings");
+    odataBuilder.EntitySet<Requirement>("Requirements");
+    odataBuilder.EntitySet<Role>("Roles");
+    odataBuilder.EntitySet<Size>("Sizes");
+    odataBuilder.EntitySet<Timeline>("Timelines");
     odataBuilder.EntitySet<Payment>("Payments");
     odataBuilder.EntitySet<OrderDetail>("OrderDetails");
     odataBuilder.EntitySet<Order>("Orders");
