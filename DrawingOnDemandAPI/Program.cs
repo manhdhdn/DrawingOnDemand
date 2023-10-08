@@ -52,5 +52,15 @@ static IEdmModel GetEdmModel()
 {
     var odataBuilder = new ODataConventionModelBuilder();
     odataBuilder.EntitySet<Account>("Accounts");
+    odataBuilder.EntitySet<AccountReview>("AccountReviews");
+    odataBuilder.EntitySet<AccountRole>("AccountRoles");
+    odataBuilder.EntitySet<Art>("Arts");
+    odataBuilder.EntitySet<Artwork>("Artworks");
+    odataBuilder.EntitySet<ArtworkReview>("ArtworkReviews");
+    odataBuilder.EntitySet<Attackment>("Attackments");
+    odataBuilder.EntitySet<Category>("Categories");
+    odataBuilder.EntitySet<DiscountByNumber>("DiscountByNumbers");
+    odataBuilder.EntitySet<DiscountBySpecial>("DiscountBySpecials");
+    odataBuilder.EntitySet<Fee>("Fees");
     return odataBuilder.GetEdmModel();
 }
