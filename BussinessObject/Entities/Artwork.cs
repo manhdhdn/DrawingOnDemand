@@ -11,6 +11,7 @@ namespace BusinessObject.Entities
             ArtworkReviews = new HashSet<ArtworkReview>();
             HandOverItems = new HashSet<HandOverItem>();
             OrderDetails = new HashSet<OrderDetail>();
+            Proposals = new HashSet<Proposal>();
         }
 
         public Guid Id { get; set; }
@@ -30,5 +31,6 @@ namespace BusinessObject.Entities
         public virtual ICollection<ArtworkReview> ArtworkReviews { get; set; }
         public virtual ICollection<HandOverItem> HandOverItems { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<Proposal> Proposals { get; set; }
     }
 }

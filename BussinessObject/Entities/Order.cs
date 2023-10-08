@@ -23,9 +23,9 @@ namespace BusinessObject.Entities
         public Guid DiscountByNumberId { get; set; }
         public Guid DiscountBySpecialId { get; set; }
 
-        public virtual DiscountByNumber? DiscountByNumber { get; set; } 
-        public virtual DiscountBySpecial? DiscountBySpecial { get; set; } 
-        public virtual Account? IdNavigation { get; set; } 
+        public virtual DiscountByNumber? DiscountByNumber { get; set; }
+        public virtual DiscountBySpecial? DiscountBySpecial { get; set; }
+        public virtual Account? IdNavigation { get; set; }
         public virtual ICollection<HandOver> HandOvers { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<Payment> Payments { get; set; }

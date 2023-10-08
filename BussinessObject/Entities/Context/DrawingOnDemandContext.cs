@@ -24,11 +24,10 @@ namespace BusinessObject.Entities.Context
         public virtual DbSet<Art> Arts { get; set; } = null!;
         public virtual DbSet<Artwork> Artworks { get; set; } = null!;
         public virtual DbSet<ArtworkReview> ArtworkReviews { get; set; } = null!;
-        public virtual DbSet<Attackment> Attackments { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
+        public virtual DbSet<Certificate> Certificates { get; set; } = null!;
         public virtual DbSet<DiscountByNumber> DiscountByNumbers { get; set; } = null!;
         public virtual DbSet<DiscountBySpecial> DiscountBySpecials { get; set; } = null!;
-        public virtual DbSet<Fee> Fees { get; set; } = null!;
         public virtual DbSet<HandOver> HandOvers { get; set; } = null!;
         public virtual DbSet<HandOverItem> HandOverItems { get; set; } = null!;
         public virtual DbSet<Invite> Invites { get; set; } = null!;
@@ -219,19 +218,6 @@ namespace BusinessObject.Entities.Context
                     .HasConstraintName("FK_ArtworkReviews_Accounts");
             });
 
-            modelBuilder.Entity<Attackment>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.Image).IsUnicode(false);
-
-                entity.HasOne(d => d.Proposal)
-                    .WithMany(p => p.Attackments)
-                    .HasForeignKey(d => d.ProposalId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Attackments_Proposals");
-            });
-
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
@@ -243,6 +229,23 @@ namespace BusinessObject.Entities.Context
                 entity.Property(e => e.Name).HasMaxLength(50);
 
                 entity.Property(e => e.Surface).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Certificate>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.AchievedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Description).HasMaxLength(300);
+
+                entity.Property(e => e.Image).IsUnicode(false);
+
+                entity.HasOne(d => d.Account)
+                    .WithMany(p => p.Certificates)
+                    .HasForeignKey(d => d.AccountId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Certificates_Accounts");
             });
 
             modelBuilder.Entity<DiscountByNumber>(entity =>
@@ -271,26 +274,6 @@ namespace BusinessObject.Entities.Context
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Fee>(entity =>
-            {
-                entity.HasIndex(e => e.RankId, "IX_Fees")
-                    .IsUnique();
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.Fee1).HasColumnName("Fee");
-
-                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.Rank)
-                    .WithOne(p => p.Fee)
-                    .HasForeignKey<Fee>(d => d.RankId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Fees_Rankings");
-            });
-
             modelBuilder.Entity<HandOver>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
@@ -299,7 +282,9 @@ namespace BusinessObject.Entities.Context
 
                 entity.Property(e => e.HandOverDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Notification).HasMaxLength(300);
+                entity.Property(e => e.Notification).HasMaxLength(100);
+
+                entity.Property(e => e.ShipmentPrice).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.Status)
                     .HasMaxLength(20)
@@ -315,8 +300,6 @@ namespace BusinessObject.Entities.Context
             modelBuilder.Entity<HandOverItem>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.ShipmentPrice).HasColumnType("decimal(18, 0)");
 
                 entity.HasOne(d => d.Artwork)
                     .WithMany(p => p.HandOverItems)
@@ -463,6 +446,12 @@ namespace BusinessObject.Entities.Context
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
+                entity.HasOne(d => d.Artword)
+                    .WithMany(p => p.Proposals)
+                    .HasForeignKey(d => d.ArtwordId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Proposals_Artworks");
+
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.Proposals)
                     .HasForeignKey(d => d.CreatedBy)
@@ -480,11 +469,15 @@ namespace BusinessObject.Entities.Context
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.IncomeRequire).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
+
                 entity.Property(e => e.Name).HasMaxLength(20);
 
-                entity.Property(e => e.TotaIncome).HasColumnType("decimal(18, 0)");
-
-                entity.Property(e => e.TotalSpend).HasColumnType("decimal(18, 0)");
+                entity.Property(e => e.SpendRequire).HasColumnType("decimal(18, 0)");
             });
 
             modelBuilder.Entity<Requirement>(entity =>
@@ -505,7 +498,7 @@ namespace BusinessObject.Entities.Context
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Title).HasMaxLength(50);
+                entity.Property(e => e.Title).HasMaxLength(100);
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Requirements)
@@ -530,9 +523,7 @@ namespace BusinessObject.Entities.Context
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.Name)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
+                entity.Property(e => e.Name).HasMaxLength(20);
             });
 
             modelBuilder.Entity<Size>(entity =>
@@ -553,6 +544,10 @@ namespace BusinessObject.Entities.Context
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Detail).HasMaxLength(300);
+
+                entity.Property(e => e.EstimatedEndDate).HasColumnType("datetime");
+
+                entity.Property(e => e.StartDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Status)
                     .HasMaxLength(20)

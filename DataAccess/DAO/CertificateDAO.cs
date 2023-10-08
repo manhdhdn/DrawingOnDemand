@@ -1,54 +1,59 @@
-﻿using BusinessObject.Entities;
-using BusinessObject.Entities.Context;
+﻿using BusinessObject.Entities.Context;
+using BusinessObject.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DataAccess.DAO
 {
-    public class FeeDAO
+    public class CertificateDAO
     {
-        public static List<Fee> GetFees()
+        public static List<Certificate> GetCertificates()
         {
-            var listFee = new List<Fee>();
+            var listCertificate = new List<Certificate>();
 
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                listFee = context.Fees.ToList();
+                listCertificate = context.Certificates.ToList();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
 
-            return listFee;
+            return listCertificate;
         }
 
-        public static Fee FindFee(Guid id)
+        public static Certificate FindCertificate(Guid id)
         {
-            Fee fee = new();
+            Certificate certificate = new();
 
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                fee = context.Fees.Find(id)!;
+                certificate = context.Certificates.Find(id)!;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
 
-            return fee!;
+            return certificate!;
         }
 
-        public static void SaveFee(Fee fee)
+        public static void SaveCertificate(Certificate certificate)
         {
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                context.Fees.Add(fee);
+                context.Certificates.Add(certificate);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -57,13 +62,13 @@ namespace DataAccess.DAO
             }
         }
 
-        public static void UpdateFee(Fee fee)
+        public static void UpdateCertificate(Certificate certificate)
         {
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                context.Entry(fee).State = EntityState.Modified;
+                context.Entry(certificate).State = EntityState.Modified;
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -72,13 +77,13 @@ namespace DataAccess.DAO
             }
         }
 
-        public static void DeleteFee(Fee fee)
+        public static void DeleteCertificate(Certificate certificate)
         {
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                context.Fees.Remove(fee);
+                context.Certificates.Remove(certificate);
                 context.SaveChanges();
             }
             catch (Exception ex)

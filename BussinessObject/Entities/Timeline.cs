@@ -8,6 +8,8 @@ namespace BusinessObject.Entities
         public Guid Id { get; set; }
         public int Number { get; set; }
         public string Detail { get; set; } = null!;
+        public DateTime StartDate { get; set; }
+        public DateTime EstimatedEndDate { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? CompletedDate { get; set; }
         public string Status { get; set; } = null!;

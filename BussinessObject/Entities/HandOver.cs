@@ -11,6 +11,7 @@ namespace BusinessObject.Entities
         }
 
         public Guid Id { get; set; }
+        public decimal ShipmentPrice { get; set; }
         public string? Notification { get; set; }
         public DateTime HandOverDate { get; set; }
         public DateTime EstimatedDeliveryDate { get; set; }
