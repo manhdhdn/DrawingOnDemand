@@ -322,6 +322,8 @@ namespace BusinessObject.Entities.Context
 
                 entity.Property(e => e.MeetingLink).IsUnicode(false);
 
+                entity.Property(e => e.MeetingDate).HasColumnType("datetime");
+
                 entity.Property(e => e.Record).IsUnicode(false);
 
                 entity.Property(e => e.Status)
@@ -350,6 +352,10 @@ namespace BusinessObject.Entities.Context
                 entity.Property(e => e.DepositDate).HasColumnType("datetime");
 
                 entity.Property(e => e.OrderDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Address)
+                    .HasMaxLength(100)
+                    .IsUnicode(true);
 
                 entity.Property(e => e.OrderType)
                     .HasMaxLength(20)

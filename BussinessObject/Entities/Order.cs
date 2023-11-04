@@ -15,6 +15,7 @@ namespace BusinessObject.Entities
         public Guid Id { get; set; }
         public string OrderType { get; set; } = null!;
         public DateTime OrderDate { get; set; }
+        public string Address { get; set; } = null!;
         public DateTime? CompletedDate { get; set; }
         public DateTime? DepositDate { get; set; }
         public string Status { get; set; } = null!;
