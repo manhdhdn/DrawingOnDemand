@@ -1,5 +1,8 @@
 using BusinessObject.Entities;
 using DrawingOnDemandAPI.Utils;
+using FirebaseAdmin;
+using FirebaseAdminAuthentication.DependencyInjection.Extensions;
+using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.OData;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
@@ -31,6 +34,15 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<AuthorizationOperationFilter>();
 });
 
+// Add Firebase auth and author
+builder.Services.AddSingleton(FirebaseApp.Create(new AppOptions()
+{
+    Credential = GoogleCredential.FromJson(builder.Configuration["FirebaseService"])
+}));
+
+builder.Services.AddFirebaseAuthentication();
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -42,6 +54,7 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

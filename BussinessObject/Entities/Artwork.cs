@@ -19,6 +19,7 @@ namespace BusinessObject.Entities
         public string? Description { get; set; }
         public decimal Price { get; set; }
         public int Pieces { get; set; }
+        public int InStock { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string Status { get; set; } = null!;
