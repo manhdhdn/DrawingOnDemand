@@ -3,14 +3,15 @@ using System.Collections.Generic;
 
 namespace BusinessObject.Entities
 {
-    public partial class DiscountBySpecial
+    public partial class Discount
     {
-        public DiscountBySpecial()
+        public Discount()
         {
             Orders = new HashSet<Order>();
         }
 
         public Guid Id { get; set; }
+        public int Number { get; set; }
         public double DiscountPercent { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
