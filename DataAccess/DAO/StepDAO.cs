@@ -4,51 +4,51 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.DAO
 {
-    public class DiscountByNumberDAO
+    public class StepDAO
     {
-        public static List<DiscountByNumber> GetDiscountByNumbers()
+        public static List<Step> GetSteps()
         {
-            var listDiscountByNumber = new List<DiscountByNumber>();
+            var listStep = new List<Step>();
 
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                listDiscountByNumber = context.DiscountByNumbers.ToList();
+                listStep = context.Steps.ToList();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
 
-            return listDiscountByNumber;
+            return listStep;
         }
 
-        public static DiscountByNumber FindDiscountByNumber(Guid id)
+        public static Step FindStep(Guid id)
         {
-            DiscountByNumber discountByNumber = new();
+            Step step = new();
 
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                discountByNumber = context.DiscountByNumbers.Find(id)!;
+                step = context.Steps.Find(id)!;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
 
-            return discountByNumber!;
+            return step!;
         }
 
-        public static void SaveDiscountByNumber(DiscountByNumber discountByNumber)
+        public static void SaveStep(Step step)
         {
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                context.DiscountByNumbers.Add(discountByNumber);
+                context.Steps.Add(step);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -57,13 +57,13 @@ namespace DataAccess.DAO
             }
         }
 
-        public static void UpdateDiscountByNumber(DiscountByNumber discountByNumber)
+        public static void UpdateStep(Step step)
         {
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                context.Entry(discountByNumber).State = EntityState.Modified;
+                context.Entry(step).State = EntityState.Modified;
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -72,13 +72,13 @@ namespace DataAccess.DAO
             }
         }
 
-        public static void DeleteDiscountByNumber(DiscountByNumber discountByNumber)
+        public static void DeleteStep(Step step)
         {
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                context.DiscountByNumbers.Remove(discountByNumber);
+                context.Steps.Remove(step);
                 context.SaveChanges();
             }
             catch (Exception ex)

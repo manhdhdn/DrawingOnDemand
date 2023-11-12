@@ -1,11 +1,6 @@
-﻿using BusinessObject.Entities.Context;
-using BusinessObject.Entities;
+﻿using BusinessObject.Entities;
+using BusinessObject.Entities.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.DAO
 {
@@ -31,20 +26,20 @@ namespace DataAccess.DAO
 
         public static Size FindSize(Guid id)
         {
-            Size Size = new();
+            Size size = new();
 
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                Size = context.Sizes.Find(id)!;
+                size = context.Sizes.Find(id)!;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
 
-            return Size!;
+            return size!;
         }
 
         public static void SaveSize(Size size)
