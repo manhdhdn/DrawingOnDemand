@@ -7,6 +7,7 @@ namespace BusinessObject.Entities
     {
         public Size()
         {
+            Artworks = new HashSet<Artwork>();
             Requirements = new HashSet<Requirement>();
         }
 
@@ -15,6 +16,7 @@ namespace BusinessObject.Entities
         public double Width { get; set; }
         public double Length { get; set; }
 
+        public virtual ICollection<Artwork> Artworks { get; set; }
         public virtual ICollection<Requirement> Requirements { get; set; }
     }
 }

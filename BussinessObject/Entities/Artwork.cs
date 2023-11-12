@@ -9,9 +9,7 @@ namespace BusinessObject.Entities
         {
             Arts = new HashSet<Art>();
             ArtworkReviews = new HashSet<ArtworkReview>();
-            HandOverItems = new HashSet<HandOverItem>();
             OrderDetails = new HashSet<OrderDetail>();
-            Proposals = new HashSet<Proposal>();
         }
 
         public Guid Id { get; set; }
@@ -19,18 +17,24 @@ namespace BusinessObject.Entities
         public string? Description { get; set; }
         public decimal Price { get; set; }
         public int Pieces { get; set; }
+        public int InStock { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string Status { get; set; } = null!;
-        public Guid CreatedBy { get; set; }
+        public Guid SizeId { get; set; }
         public Guid CategoryId { get; set; }
+        public Guid SurfaceId { get; set; }
+        public Guid MaterialId { get; set; }
+        public Guid CreatedBy { get; set; }
 
-        public virtual Category? Category { get; set; }
-        public virtual Account? CreatedByNavigation { get; set; }
+        public virtual Category? Category { get; set; } 
+        public virtual Account? CreatedByNavigation { get; set; } 
+        public virtual Material? Material { get; set; }
+        public virtual Size? Size { get; set; } 
+        public virtual Surface? Surface { get; set; }
+        public virtual Proposal? Proposal { get; set; }
         public virtual ICollection<Art> Arts { get; set; }
         public virtual ICollection<ArtworkReview> ArtworkReviews { get; set; }
-        public virtual ICollection<HandOverItem> HandOverItems { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        public virtual ICollection<Proposal> Proposals { get; set; }
     }
 }

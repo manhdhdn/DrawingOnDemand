@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using BusinessObject.Entities;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace BusinessObject.Entities.Context
@@ -26,20 +22,21 @@ namespace BusinessObject.Entities.Context
         public virtual DbSet<ArtworkReview> ArtworkReviews { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<Certificate> Certificates { get; set; } = null!;
-        public virtual DbSet<DiscountByNumber> DiscountByNumbers { get; set; } = null!;
-        public virtual DbSet<DiscountBySpecial> DiscountBySpecials { get; set; } = null!;
+        public virtual DbSet<Discount> Discounts { get; set; } = null!;
         public virtual DbSet<HandOver> HandOvers { get; set; } = null!;
         public virtual DbSet<HandOverItem> HandOverItems { get; set; } = null!;
         public virtual DbSet<Invite> Invites { get; set; } = null!;
+        public virtual DbSet<Material> Materials { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<OrderDetail> OrderDetails { get; set; } = null!;
         public virtual DbSet<Payment> Payments { get; set; } = null!;
         public virtual DbSet<Proposal> Proposals { get; set; } = null!;
-        public virtual DbSet<Ranking> Rankings { get; set; } = null!;
+        public virtual DbSet<Rank> Ranks { get; set; } = null!;
         public virtual DbSet<Requirement> Requirements { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Size> Sizes { get; set; } = null!;
-        public virtual DbSet<Timeline> Timelines { get; set; } = null!;
+        public virtual DbSet<Step> Steps { get; set; } = null!;
+        public virtual DbSet<Surface> Surfaces { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -60,7 +57,7 @@ namespace BusinessObject.Entities.Context
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.Address).HasMaxLength(300);
+                entity.Property(e => e.Address).HasMaxLength(200);
 
                 entity.Property(e => e.Avartar).IsUnicode(false);
 
@@ -82,6 +79,7 @@ namespace BusinessObject.Entities.Context
 
                 entity.Property(e => e.Phone)
                     .HasMaxLength(10)
+                    .IsUnicode(false)
                     .IsFixedLength();
 
                 entity.Property(e => e.Status)
@@ -92,7 +90,7 @@ namespace BusinessObject.Entities.Context
                     .WithMany(p => p.Accounts)
                     .HasForeignKey(d => d.RankId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Accounts_Rankings");
+                    .HasConstraintName("FK_Accounts_Ranks");
             });
 
             modelBuilder.Entity<AccountReview>(entity =>
@@ -151,6 +149,8 @@ namespace BusinessObject.Entities.Context
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
                 entity.Property(e => e.Image).IsUnicode(false);
 
                 entity.HasOne(d => d.Artwork)
@@ -189,6 +189,24 @@ namespace BusinessObject.Entities.Context
                     .HasForeignKey(d => d.CreatedBy)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Artworks_Accounts");
+
+                entity.HasOne(d => d.Material)
+                    .WithMany(p => p.Artworks)
+                    .HasForeignKey(d => d.MaterialId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Artworks_Materials");
+
+                entity.HasOne(d => d.Size)
+                    .WithMany(p => p.Artworks)
+                    .HasForeignKey(d => d.SizeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Artworks_Sizes");
+
+                entity.HasOne(d => d.Surface)
+                    .WithMany(p => p.Artworks)
+                    .HasForeignKey(d => d.SurfaceId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Artworks_Surfaces");
             });
 
             modelBuilder.Entity<ArtworkReview>(entity =>
@@ -224,11 +242,7 @@ namespace BusinessObject.Entities.Context
 
                 entity.Property(e => e.Description).HasMaxLength(300);
 
-                entity.Property(e => e.Material).HasMaxLength(50);
-
                 entity.Property(e => e.Name).HasMaxLength(50);
-
-                entity.Property(e => e.Surface).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Certificate>(entity =>
@@ -248,20 +262,7 @@ namespace BusinessObject.Entities.Context
                     .HasConstraintName("FK_Certificates_Accounts");
             });
 
-            modelBuilder.Entity<DiscountByNumber>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.EndDate).HasColumnType("datetime");
-
-                entity.Property(e => e.StartDate).HasColumnType("datetime");
-
-                entity.Property(e => e.Status)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<DiscountBySpecial>(entity =>
+            modelBuilder.Entity<Discount>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -282,7 +283,16 @@ namespace BusinessObject.Entities.Context
 
                 entity.Property(e => e.HandOverDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Notification).HasMaxLength(100);
+                entity.Property(e => e.Name).HasMaxLength(50);
+
+                entity.Property(e => e.Phone)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .IsFixedLength();
+
+                entity.Property(e => e.PickupAddress).HasMaxLength(200);
+
+                entity.Property(e => e.ReceiveAddress).HasMaxLength(200);
 
                 entity.Property(e => e.ShipmentPrice).HasColumnType("decimal(18, 0)");
 
@@ -299,26 +309,33 @@ namespace BusinessObject.Entities.Context
 
             modelBuilder.Entity<HandOverItem>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasIndex(e => e.OrderDetailId, "IX_HandOverItems")
+                    .IsUnique();
 
-                entity.HasOne(d => d.Artwork)
-                    .WithMany(p => p.HandOverItems)
-                    .HasForeignKey(d => d.ArtworkId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_HandOverItems_Artworks");
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.HasOne(d => d.HandOver)
                     .WithMany(p => p.HandOverItems)
                     .HasForeignKey(d => d.HandOverId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_HandOverItems_HandOvers");
+
+                entity.HasOne(d => d.OrderDetail)
+                    .WithOne(p => p.HandOverItem)
+                    .HasForeignKey<HandOverItem>(d => d.OrderDetailId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_HandOverItems_OrderDetails");
             });
 
             modelBuilder.Entity<Invite>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
+                entity.Property(e => e.Cost).HasColumnType("decimal(18, 0)");
+
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.MeetingDate).HasColumnType("datetime");
 
                 entity.Property(e => e.MeetingLink).IsUnicode(false);
 
@@ -328,9 +345,9 @@ namespace BusinessObject.Entities.Context
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.RecivedByNavigation)
+                entity.HasOne(d => d.ReceivedByNavigation)
                     .WithMany(p => p.Invites)
-                    .HasForeignKey(d => d.RecivedBy)
+                    .HasForeignKey(d => d.ReceivedBy)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Invites_Accounts");
 
@@ -339,6 +356,15 @@ namespace BusinessObject.Entities.Context
                     .HasForeignKey(d => d.RequirementId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Invites_Requirements");
+            });
+
+            modelBuilder.Entity<Material>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Description).HasMaxLength(300);
+
+                entity.Property(e => e.Name).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -361,21 +387,15 @@ namespace BusinessObject.Entities.Context
 
                 entity.Property(e => e.Total).HasColumnType("decimal(18, 0)");
 
-                entity.HasOne(d => d.DiscountByNumber)
+                entity.HasOne(d => d.Discount)
                     .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.DiscountByNumberId)
+                    .HasForeignKey(d => d.DiscountId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Orders_DiscountByNumbers");
+                    .HasConstraintName("FK_Orders_Discounts");
 
-                entity.HasOne(d => d.DiscountBySpecial)
+                entity.HasOne(d => d.OrderedbyNavigation)
                     .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.DiscountBySpecialId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Orders_DiscountBySpecials");
-
-                entity.HasOne(d => d.IdNavigation)
-                    .WithOne(p => p.Order)
-                    .HasForeignKey<Order>(d => d.Id)
+                    .HasForeignKey(d => d.Orderedby)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Orders_Accounts");
             });
@@ -403,10 +423,6 @@ namespace BusinessObject.Entities.Context
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.PaymentMethod)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.Signature)
                     .HasMaxLength(200)
                     .IsUnicode(false);
@@ -432,6 +448,11 @@ namespace BusinessObject.Entities.Context
 
             modelBuilder.Entity<Proposal>(entity =>
             {
+                entity.HasIndex(e => e.ArtwordId, "IX_Proposals")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.Id, "IX_Proposals_1");
+
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Cost).HasColumnType("decimal(18, 0)");
@@ -447,8 +468,8 @@ namespace BusinessObject.Entities.Context
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Artword)
-                    .WithMany(p => p.Proposals)
-                    .HasForeignKey(d => d.ArtwordId)
+                    .WithOne(p => p.Proposal)
+                    .HasForeignKey<Proposal>(d => d.ArtwordId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Proposals_Artworks");
 
@@ -465,19 +486,19 @@ namespace BusinessObject.Entities.Context
                     .HasConstraintName("FK_Proposals_Requirements");
             });
 
-            modelBuilder.Entity<Ranking>(entity =>
+            modelBuilder.Entity<Rank>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.IncomeRequire).HasColumnType("decimal(18, 0)");
+                entity.Property(e => e.Income).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Name).HasMaxLength(20);
 
-                entity.Property(e => e.SpendRequire).HasColumnType("decimal(18, 0)");
+                entity.Property(e => e.Spend).HasColumnType("decimal(18, 0)");
             });
 
             modelBuilder.Entity<Requirement>(entity =>
@@ -512,11 +533,23 @@ namespace BusinessObject.Entities.Context
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Projects_Accounts");
 
+                entity.HasOne(d => d.Material)
+                    .WithMany(p => p.Requirements)
+                    .HasForeignKey(d => d.MaterialId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Requirements_Materials");
+
                 entity.HasOne(d => d.Size)
                     .WithMany(p => p.Requirements)
                     .HasForeignKey(d => d.SizeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Projects_Sizes");
+
+                entity.HasOne(d => d.Surface)
+                    .WithMany(p => p.Requirements)
+                    .HasForeignKey(d => d.SurfaceId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Requirements_Surfaces");
             });
 
             modelBuilder.Entity<Role>(entity =>
@@ -535,7 +568,7 @@ namespace BusinessObject.Entities.Context
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Timeline>(entity =>
+            modelBuilder.Entity<Step>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -554,10 +587,19 @@ namespace BusinessObject.Entities.Context
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Requirement)
-                    .WithMany(p => p.Timelines)
+                    .WithMany(p => p.Steps)
                     .HasForeignKey(d => d.RequirementId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Timelines_Requirements");
+                    .HasConstraintName("FK_Steps_Requirements");
+            });
+
+            modelBuilder.Entity<Surface>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Description).HasMaxLength(300);
+
+                entity.Property(e => e.Name).HasMaxLength(50);
             });
 
             OnModelCreatingPartial(modelBuilder);
