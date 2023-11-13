@@ -4,51 +4,51 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.DAO
 {
-    public class DiscountBySpecialDAO
+    public class MaterialDAO
     {
-        public static List<DiscountBySpecial> GetDiscountBySpecials()
+        public static List<Material> GetMaterials()
         {
-            var listDiscountBySpecial = new List<DiscountBySpecial>();
+            var listMaterial = new List<Material>();
 
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                listDiscountBySpecial = context.DiscountBySpecials.ToList();
+                listMaterial = context.Materials.ToList();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
 
-            return listDiscountBySpecial;
+            return listMaterial;
         }
 
-        public static DiscountBySpecial FindDiscountBySpecial(Guid id)
+        public static Material FindMaterial(Guid id)
         {
-            DiscountBySpecial discountBySpecial = new();
+            Material material = new();
 
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                discountBySpecial = context.DiscountBySpecials.Find(id)!;
+                material = context.Materials.Find(id)!;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
 
-            return discountBySpecial!;
+            return material!;
         }
 
-        public static void SaveDiscountBySpecial(DiscountBySpecial discountBySpecial)
+        public static void SaveMaterial(Material material)
         {
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                context.DiscountBySpecials.Add(discountBySpecial);
+                context.Materials.Add(material);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -57,13 +57,13 @@ namespace DataAccess.DAO
             }
         }
 
-        public static void UpdateDiscountBySpecial(DiscountBySpecial discountBySpecial)
+        public static void UpdateMaterial(Material material)
         {
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                context.Entry(discountBySpecial).State = EntityState.Modified;
+                context.Entry(material).State = EntityState.Modified;
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -72,13 +72,13 @@ namespace DataAccess.DAO
             }
         }
 
-        public static void DeleteDiscountBySpecial(DiscountBySpecial discountBySpecial)
+        public static void DeleteMaterial(Material material)
         {
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                context.DiscountBySpecials.Remove(discountBySpecial);
+                context.Materials.Remove(material);
                 context.SaveChanges();
             }
             catch (Exception ex)

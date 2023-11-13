@@ -1,54 +1,54 @@
-﻿using BusinessObject.Entities.Context;
-using BusinessObject.Entities;
+﻿using BusinessObject.Entities;
+using BusinessObject.Entities.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.DAO
 {
-    public class CertificateDAO
+    public class SurfaceDAO
     {
-        public static List<Certificate> GetCertificates()
+        public static List<Surface> GetSurfaces()
         {
-            var listCertificate = new List<Certificate>();
+            var listSurface = new List<Surface>();
 
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                listCertificate = context.Certificates.ToList();
+                listSurface = context.Surfaces.ToList();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
 
-            return listCertificate;
+            return listSurface;
         }
 
-        public static Certificate FindCertificate(Guid id)
+        public static Surface FindSurface(Guid id)
         {
-            Certificate certificate = new();
+            Surface surface = new();
 
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                certificate = context.Certificates.Find(id)!;
+                surface = context.Surfaces.Find(id)!;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
 
-            return certificate!;
+            return surface!;
         }
 
-        public static void SaveCertificate(Certificate certificate)
+        public static void SaveSurface(Surface surface)
         {
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                context.Certificates.Add(certificate);
+                context.Surfaces.Add(surface);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -57,13 +57,13 @@ namespace DataAccess.DAO
             }
         }
 
-        public static void UpdateCertificate(Certificate certificate)
+        public static void UpdateSurface(Surface surface)
         {
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                context.Entry(certificate).State = EntityState.Modified;
+                context.Entry(surface).State = EntityState.Modified;
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -72,13 +72,13 @@ namespace DataAccess.DAO
             }
         }
 
-        public static void DeleteCertificate(Certificate certificate)
+        public static void DeleteSurface(Surface surface)
         {
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                context.Certificates.Remove(certificate);
+                context.Surfaces.Remove(surface);
                 context.SaveChanges();
             }
             catch (Exception ex)

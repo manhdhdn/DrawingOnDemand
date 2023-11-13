@@ -1,11 +1,6 @@
-﻿using BusinessObject.Entities.Context;
-using BusinessObject.Entities;
+﻿using BusinessObject.Entities;
+using BusinessObject.Entities.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.DAO
 {
@@ -31,20 +26,20 @@ namespace DataAccess.DAO
 
         public static Requirement FindRequirement(Guid id)
         {
-            Requirement Requirement = new();
+            Requirement requirement = new();
 
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                Requirement = context.Requirements.Find(id)!;
+                requirement = context.Requirements.Find(id)!;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
 
-            return Requirement!;
+            return requirement!;
         }
 
         public static void SaveRequirement(Requirement requirement)
