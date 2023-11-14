@@ -11,10 +11,13 @@ namespace BusinessObject.Entities
         }
 
         public Guid Id { get; set; }
+        public string Name { get; set; } = null!;
+        public string Phone { get; set; } = null!;
+        public string PickupAddress { get; set; } = null!;
+        public string ReceiveAddress { get; set; } = null!;
         public decimal ShipmentPrice { get; set; }
-        public string? Notification { get; set; }
-        public DateTime HandOverDate { get; set; }
         public DateTime EstimatedDeliveryDate { get; set; }
+        public DateTime HandOverDate { get; set; }
         public string Status { get; set; } = null!;
         public Guid OrderId { get; set; }
 

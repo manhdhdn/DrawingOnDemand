@@ -1,59 +1,54 @@
-﻿using BusinessObject.Entities.Context;
-using BusinessObject.Entities;
+﻿using BusinessObject.Entities;
+using BusinessObject.Entities.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.DAO
 {
-    public class RankingDAO
+    public class RankDAO
     {
-        public static List<Ranking> GetRankings()
+        public static List<Rank> GetRanks()
         {
-            var listRanking = new List<Ranking>();
+            var listRank = new List<Rank>();
 
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                listRanking = context.Rankings.ToList();
+                listRank = context.Ranks.ToList();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
 
-            return listRanking;
+            return listRank;
         }
 
-        public static Ranking FindRanking(Guid id)
+        public static Rank FindRank(Guid id)
         {
-            Ranking Ranking = new();
+            Rank rank = new();
 
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                Ranking = context.Rankings.Find(id)!;
+                rank = context.Ranks.Find(id)!;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
 
-            return Ranking!;
+            return rank!;
         }
 
-        public static void SaveRanking(Ranking ranking)
+        public static void SaveRank(Rank rank)
         {
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                context.Rankings.Add(ranking);
+                context.Ranks.Add(rank);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -62,13 +57,13 @@ namespace DataAccess.DAO
             }
         }
 
-        public static void UpdateRanking(Ranking ranking)
+        public static void UpdateRank(Rank rank)
         {
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                context.Entry(ranking).State = EntityState.Modified;
+                context.Entry(rank).State = EntityState.Modified;
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -77,13 +72,13 @@ namespace DataAccess.DAO
             }
         }
 
-        public static void DeleteRanking(Ranking ranking)
+        public static void DeleteRank(Rank rank)
         {
             try
             {
                 using var context = new DrawingOnDemandContext();
 
-                context.Rankings.Remove(ranking);
+                context.Ranks.Remove(rank);
                 context.SaveChanges();
             }
             catch (Exception ex)

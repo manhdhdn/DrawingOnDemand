@@ -72,19 +72,20 @@ static IEdmModel GetEdmModel()
     odataBuilder.EntitySet<ArtworkReview>("ArtworkReviews");
     odataBuilder.EntitySet<Category>("Categories");
     odataBuilder.EntitySet<Certificate>("Certificates");
-    odataBuilder.EntitySet<DiscountByNumber>("DiscountByNumbers");
-    odataBuilder.EntitySet<DiscountBySpecial>("DiscountBySpecials");
+    odataBuilder.EntitySet<Discount>("Discounts");
     odataBuilder.EntitySet<HandOver>("HandOvers");
     odataBuilder.EntitySet<HandOverItem>("HandOverItems");
     odataBuilder.EntitySet<Invite>("Invites");
+    odataBuilder.EntitySet<Material>("Materials");
     odataBuilder.EntitySet<Order>("Orders");
     odataBuilder.EntitySet<OrderDetail>("OrderDetails");
     odataBuilder.EntitySet<Payment>("Payments");
     odataBuilder.EntitySet<Proposal>("Proposals");
-    odataBuilder.EntitySet<Ranking>("Rankings");
+    odataBuilder.EntitySet<Rank>("Ranks");
     odataBuilder.EntitySet<Requirement>("Requirements");
     odataBuilder.EntitySet<Role>("Roles");
     odataBuilder.EntitySet<Size>("Sizes");
-    odataBuilder.EntitySet<Timeline>("Timelines");
+    odataBuilder.EntitySet<Step>("Steps");
+    odataBuilder.EntitySet<Surface>("Surfaces");
     return odataBuilder.GetEdmModel();
 }

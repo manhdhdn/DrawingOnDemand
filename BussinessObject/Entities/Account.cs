@@ -14,6 +14,7 @@ namespace BusinessObject.Entities
             Artworks = new HashSet<Artwork>();
             Certificates = new HashSet<Certificate>();
             Invites = new HashSet<Invite>();
+            Orders = new HashSet<Order>();
             Proposals = new HashSet<Proposal>();
             Requirements = new HashSet<Requirement>();
         }
@@ -31,8 +32,7 @@ namespace BusinessObject.Entities
         public string Status { get; set; } = null!;
         public Guid RankId { get; set; }
 
-        public virtual Ranking? Rank { get; set; }
-        public virtual Order? Order { get; set; }
+        public virtual Rank? Rank { get; set; }
         public virtual ICollection<AccountReview> AccountReviewAccounts { get; set; }
         public virtual ICollection<AccountReview> AccountReviewCreatedByNavigations { get; set; }
         public virtual ICollection<AccountRole> AccountRoles { get; set; }
@@ -40,6 +40,7 @@ namespace BusinessObject.Entities
         public virtual ICollection<Artwork> Artworks { get; set; }
         public virtual ICollection<Certificate> Certificates { get; set; }
         public virtual ICollection<Invite> Invites { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Proposal> Proposals { get; set; }
         public virtual ICollection<Requirement> Requirements { get; set; }
     }

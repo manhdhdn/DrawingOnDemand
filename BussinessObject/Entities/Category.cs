@@ -13,8 +13,6 @@ namespace BusinessObject.Entities
 
         public Guid Id { get; set; }
         public string Name { get; set; } = null!;
-        public string Surface { get; set; } = null!;
-        public string Material { get; set; } = null!;
         public string Description { get; set; } = null!;
 
         public virtual ICollection<Artwork> Artworks { get; set; }

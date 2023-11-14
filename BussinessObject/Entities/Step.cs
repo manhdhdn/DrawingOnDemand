@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BusinessObject.Entities
 {
-    public partial class Timeline
+    public partial class Step
     {
         public Guid Id { get; set; }
         public int Number { get; set; }
