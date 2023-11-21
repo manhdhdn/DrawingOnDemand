@@ -32,7 +32,12 @@ namespace DataAccess.DAO
             {
                 using var context = new DrawingOnDemandContext();
 
-                account = context.Accounts.Find(id)!;
+                account = context.Accounts
+                    .Include(a => a.Rank)
+                    .Include(a => a.AccountRoles)
+                    .Include(a => a.Artworks)
+                    .Include(a => a.AccountReviewAccounts)
+                    .Single(a => a.Id == id);
             }
             catch (Exception ex)
             {
