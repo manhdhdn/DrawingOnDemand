@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="D:\Edu\Learn\Term IX\Capstone Project\Project\Product\DrawingOnDemand\BussinessObject\BusinessObject.csproj" />
+    <ProjectReference Include="..\BussinessObject\BusinessObject.csproj" />
   </ItemGroup>
 
 </Project>
