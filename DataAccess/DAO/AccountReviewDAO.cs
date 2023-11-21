@@ -32,7 +32,9 @@ namespace DataAccess.DAO
             {
                 using var context = new DrawingOnDemandContext();
 
-                accountReview = context.AccountReviews.Find(id)!;
+                accountReview = context.AccountReviews
+                    .Include(ar => ar.CreatedByNavigation)
+                    .Single(ar => ar.Id == id);
             }
             catch (Exception ex)
             {

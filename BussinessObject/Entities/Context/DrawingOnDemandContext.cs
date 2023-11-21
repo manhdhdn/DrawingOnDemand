@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 
 namespace BusinessObject.Entities.Context
@@ -47,7 +48,8 @@ namespace BusinessObject.Entities.Context
                     .AddJsonFile("appsettings.json", true, true)
                     .Build();
 
-                optionsBuilder.UseSqlServer(configuration.GetConnectionString("DrawingOnDemand"));
+                optionsBuilder
+                    .UseSqlServer(configuration.GetConnectionString("DrawingOnDemand"));
             }
         }
 
