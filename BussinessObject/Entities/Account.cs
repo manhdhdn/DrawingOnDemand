@@ -30,7 +30,7 @@ namespace BusinessObject.Entities
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string Status { get; set; } = null!;
-        public Guid RankId { get; set; }
+        public Guid? RankId { get; set; }
 
         public virtual Rank? Rank { get; set; }
         public virtual ICollection<AccountReview> AccountReviewAccounts { get; set; }
