@@ -15,10 +15,7 @@ namespace DataAccess.DAO
                 using var context = new DrawingOnDemandContext();
 
                 listAccount = context.Accounts
-                    .Include(a => a.Rank)
                     .Include(a => a.AccountRoles).ThenInclude(ar => ar.Role)
-                    .Include(a => a.Artworks)
-                    .Include(a => a.AccountReviewAccounts)
                     .ToList();
             }
             catch (Exception ex)
@@ -39,9 +36,9 @@ namespace DataAccess.DAO
 
                 account = context.Accounts
                     .Include(a => a.Rank)
-                    .Include(a => a.AccountRoles).ThenInclude(ar => ar.Role)
+                    .Include(a => a.AccountReviewAccounts).ThenInclude(ar => ar.CreatedByNavigation)
                     .Include(a => a.Artworks)
-                    .Include(a => a.AccountReviewAccounts)
+                    .Include(a => a.Certificates)
                     .Single(a => a.Id == id);
             }
             catch (Exception ex)
