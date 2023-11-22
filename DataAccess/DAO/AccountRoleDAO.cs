@@ -14,7 +14,10 @@ namespace DataAccess.DAO
             {
                 using var context = new DrawingOnDemandContext();
 
-                listAccountRole = context.AccountRoles.ToList();
+                listAccountRole = context.AccountRoles
+                    .Include(ar => ar.Account)
+                    .Include(ar => ar.Role)
+                    .ToList();
             }
             catch (Exception ex)
             {
@@ -32,7 +35,10 @@ namespace DataAccess.DAO
             {
                 using var context = new DrawingOnDemandContext();
 
-                accountRole = context.AccountRoles.Find(id)!;
+                accountRole = context.AccountRoles
+                    .Include(ar => ar.Account)
+                    .Include(ar => ar.Role)
+                    .Single(ar => ar.Id == id);
             }
             catch (Exception ex)
             {

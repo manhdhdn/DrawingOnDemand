@@ -14,7 +14,10 @@ namespace DataAccess.DAO
             {
                 using var context = new DrawingOnDemandContext();
 
-                listAccountReview = context.AccountReviews.ToList();
+                listAccountReview = context.AccountReviews
+                    .Include(ar => ar.Account)
+                    .Include(ar => ar.CreatedByNavigation)
+                    .ToList();
             }
             catch (Exception ex)
             {
@@ -33,6 +36,7 @@ namespace DataAccess.DAO
                 using var context = new DrawingOnDemandContext();
 
                 accountReview = context.AccountReviews
+                    .Include(ar => ar.Account)
                     .Include(ar => ar.CreatedByNavigation)
                     .Single(ar => ar.Id == id);
             }
