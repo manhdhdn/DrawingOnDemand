@@ -24,7 +24,7 @@ namespace BusinessObject.Entities
         public string Phone { get; set; } = null!;
         public string Name { get; set; } = null!;
         public string Gender { get; set; } = null!;
-        public string? Avartar { get; set; }
+        public string? Avatar { get; set; }
         public string? Address { get; set; }
         public string? Bio { get; set; }
         public DateTime CreatedDate { get; set; }

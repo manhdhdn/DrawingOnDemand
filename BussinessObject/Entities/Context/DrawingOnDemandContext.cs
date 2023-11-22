@@ -61,7 +61,7 @@ namespace BusinessObject.Entities.Context
 
                 entity.Property(e => e.Address).HasMaxLength(200);
 
-                entity.Property(e => e.Avartar).IsUnicode(false);
+                entity.Property(e => e.Avatar).IsUnicode(false);
 
                 entity.Property(e => e.Bio).HasMaxLength(300);
 
