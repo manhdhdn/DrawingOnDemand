@@ -9,10 +9,10 @@ namespace BusinessObject.Entities
         public DateTime AddedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string Status { get; set; } = null!;
-        public Guid AccountId { get; set; }
-        public Guid RoleId { get; set; }
+        public Guid? AccountId { get; set; }
+        public Guid? RoleId { get; set; }
 
-        public virtual Account? Account { get; set; } 
+        public virtual Account? Account { get; set; }
         public virtual Role? Role { get; set; }
     }
 }

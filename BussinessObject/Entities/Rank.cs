@@ -15,6 +15,7 @@ namespace BusinessObject.Entities
         public decimal Income { get; set; }
         public decimal Spend { get; set; }
         public double Fee { get; set; }
+        public int Connect { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
 

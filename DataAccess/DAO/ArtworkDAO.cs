@@ -20,7 +20,6 @@ namespace DataAccess.DAO
                     .Include(aw => aw.ArtworkReviews)
                     .Include(aw => aw.Category)
                     .Include(aw => aw.Material)
-                    .Include(aw => aw.Size)
                     .Include(aw => aw.Surface)
                     .ToList();
             }
