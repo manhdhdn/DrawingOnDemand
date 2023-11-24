@@ -1,5 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using BusinessObject.Entities;
 using Microsoft.Extensions.Configuration;
 
 namespace BusinessObject.Entities.Context
@@ -91,7 +94,6 @@ namespace BusinessObject.Entities.Context
                 entity.HasOne(d => d.Rank)
                     .WithMany(p => p.Accounts)
                     .HasForeignKey(d => d.RankId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Accounts_Ranks");
             });
 
@@ -112,13 +114,11 @@ namespace BusinessObject.Entities.Context
                 entity.HasOne(d => d.Account)
                     .WithMany(p => p.AccountReviewAccounts)
                     .HasForeignKey(d => d.AccountId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_AccountReviews_Accounts1");
 
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.AccountReviewCreatedByNavigations)
                     .HasForeignKey(d => d.CreatedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_AccountReviews_Accounts");
             });
 
@@ -137,13 +137,11 @@ namespace BusinessObject.Entities.Context
                 entity.HasOne(d => d.Account)
                     .WithMany(p => p.AccountRoles)
                     .HasForeignKey(d => d.AccountId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_AccountRoles_Accounts");
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.AccountRoles)
                     .HasForeignKey(d => d.RoleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_AccountRoles_Roles");
             });
 
@@ -158,7 +156,6 @@ namespace BusinessObject.Entities.Context
                 entity.HasOne(d => d.Artwork)
                     .WithMany(p => p.Arts)
                     .HasForeignKey(d => d.ArtworkId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Arts_Artworks");
             });
 
@@ -183,31 +180,21 @@ namespace BusinessObject.Entities.Context
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Artworks)
                     .HasForeignKey(d => d.CategoryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Artworks_Categories");
 
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.Artworks)
                     .HasForeignKey(d => d.CreatedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Artworks_Accounts");
 
                 entity.HasOne(d => d.Material)
                     .WithMany(p => p.Artworks)
                     .HasForeignKey(d => d.MaterialId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Artworks_Materials");
-
-                entity.HasOne(d => d.Size)
-                    .WithMany(p => p.Artworks)
-                    .HasForeignKey(d => d.SizeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Artworks_Sizes");
 
                 entity.HasOne(d => d.Surface)
                     .WithMany(p => p.Artworks)
                     .HasForeignKey(d => d.SurfaceId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Artworks_Surfaces");
             });
 
@@ -228,13 +215,11 @@ namespace BusinessObject.Entities.Context
                 entity.HasOne(d => d.Artwork)
                     .WithMany(p => p.ArtworkReviews)
                     .HasForeignKey(d => d.ArtworkId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ArtworkReviews_Artworks");
 
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.ArtworkReviews)
                     .HasForeignKey(d => d.CreatedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ArtworkReviews_Accounts");
             });
 
@@ -260,7 +245,6 @@ namespace BusinessObject.Entities.Context
                 entity.HasOne(d => d.Account)
                     .WithMany(p => p.Certificates)
                     .HasForeignKey(d => d.AccountId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Certificates_Accounts");
             });
 
@@ -279,7 +263,9 @@ namespace BusinessObject.Entities.Context
 
             modelBuilder.Entity<HandOver>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.EstimatedDeliveryDate).HasColumnType("datetime");
 
@@ -305,7 +291,6 @@ namespace BusinessObject.Entities.Context
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.HandOvers)
                     .HasForeignKey(d => d.OrderId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_HandOvers_Orders");
             });
 
@@ -316,16 +301,18 @@ namespace BusinessObject.Entities.Context
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
+                entity.Property(e => e.HandOverId)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
                 entity.HasOne(d => d.HandOver)
                     .WithMany(p => p.HandOverItems)
                     .HasForeignKey(d => d.HandOverId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_HandOverItems_HandOvers");
 
                 entity.HasOne(d => d.OrderDetail)
                     .WithOne(p => p.HandOverItem)
                     .HasForeignKey<HandOverItem>(d => d.OrderDetailId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_HandOverItems_OrderDetails");
             });
 
@@ -350,13 +337,11 @@ namespace BusinessObject.Entities.Context
                 entity.HasOne(d => d.ReceivedByNavigation)
                     .WithMany(p => p.Invites)
                     .HasForeignKey(d => d.ReceivedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Invites_Accounts");
 
                 entity.HasOne(d => d.Requirement)
                     .WithMany(p => p.Invites)
                     .HasForeignKey(d => d.RequirementId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Invites_Requirements");
             });
 
@@ -392,13 +377,11 @@ namespace BusinessObject.Entities.Context
                 entity.HasOne(d => d.Discount)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.DiscountId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Orders_Discounts");
 
                 entity.HasOne(d => d.OrderedbyNavigation)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.Orderedby)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Orders_Accounts");
             });
 
@@ -411,13 +394,11 @@ namespace BusinessObject.Entities.Context
                 entity.HasOne(d => d.Artwork)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.ArtworkId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OrderDetails_Artworks");
 
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.OrderId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OrderDetails_Orders");
             });
 
@@ -444,7 +425,6 @@ namespace BusinessObject.Entities.Context
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.Payments)
                     .HasForeignKey(d => d.OrderId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Payments_Orders");
             });
 
@@ -472,13 +452,11 @@ namespace BusinessObject.Entities.Context
                 entity.HasOne(d => d.Artword)
                     .WithOne(p => p.Proposal)
                     .HasForeignKey<Proposal>(d => d.ArtwordId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Proposals_Artworks");
 
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.Proposals)
                     .HasForeignKey(d => d.CreatedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Proposals_Accounts");
 
                 entity.HasOne(d => d.Requirement)
@@ -526,31 +504,21 @@ namespace BusinessObject.Entities.Context
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Requirements)
                     .HasForeignKey(d => d.CategoryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Projects_Categories");
 
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.Requirements)
                     .HasForeignKey(d => d.CreatedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Projects_Accounts");
 
                 entity.HasOne(d => d.Material)
                     .WithMany(p => p.Requirements)
                     .HasForeignKey(d => d.MaterialId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Requirements_Materials");
-
-                entity.HasOne(d => d.Size)
-                    .WithMany(p => p.Requirements)
-                    .HasForeignKey(d => d.SizeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Projects_Sizes");
 
                 entity.HasOne(d => d.Surface)
                     .WithMany(p => p.Requirements)
                     .HasForeignKey(d => d.SurfaceId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Requirements_Surfaces");
             });
 
@@ -565,9 +533,15 @@ namespace BusinessObject.Entities.Context
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.Name)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
+                entity.HasOne(d => d.Artwork)
+                    .WithMany(p => p.Sizes)
+                    .HasForeignKey(d => d.ArtworkId)
+                    .HasConstraintName("FK_Sizes_Artworks");
+
+                entity.HasOne(d => d.Requirement)
+                    .WithMany(p => p.Sizes)
+                    .HasForeignKey(d => d.RequirementId)
+                    .HasConstraintName("FK_Sizes_Requirements");
             });
 
             modelBuilder.Entity<Step>(entity =>
@@ -591,7 +565,6 @@ namespace BusinessObject.Entities.Context
                 entity.HasOne(d => d.Requirement)
                     .WithMany(p => p.Steps)
                     .HasForeignKey(d => d.RequirementId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Steps_Requirements");
             });
 

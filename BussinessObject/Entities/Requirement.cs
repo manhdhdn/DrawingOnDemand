@@ -9,6 +9,7 @@ namespace BusinessObject.Entities
         {
             Invites = new HashSet<Invite>();
             Proposals = new HashSet<Proposal>();
+            Sizes = new HashSet<Size>();
             Steps = new HashSet<Step>();
         }
 
@@ -21,19 +22,18 @@ namespace BusinessObject.Entities
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string Status { get; set; } = null!;
-        public Guid SizeId { get; set; }
-        public Guid CategoryId { get; set; }
-        public Guid SurfaceId { get; set; }
-        public Guid MaterialId { get; set; }
-        public Guid CreatedBy { get; set; }
+        public Guid? CategoryId { get; set; }
+        public Guid? SurfaceId { get; set; }
+        public Guid? MaterialId { get; set; }
+        public Guid? CreatedBy { get; set; }
 
         public virtual Category? Category { get; set; }
-        public virtual Account? CreatedByNavigation { get; set; } 
-        public virtual Material? Material { get; set; } 
-        public virtual Size? Size { get; set; }
+        public virtual Account? CreatedByNavigation { get; set; }
+        public virtual Material? Material { get; set; }
         public virtual Surface? Surface { get; set; }
         public virtual ICollection<Invite> Invites { get; set; }
         public virtual ICollection<Proposal> Proposals { get; set; }
+        public virtual ICollection<Size> Sizes { get; set; }
         public virtual ICollection<Step> Steps { get; set; }
     }
 }

@@ -24,7 +24,7 @@ namespace DataAccess.DAO
             return listHandOver;
         }
 
-        public static HandOver FindHandOver(Guid id)
+        public static HandOver FindHandOver(string id)
         {
             HandOver handOver = new();
 

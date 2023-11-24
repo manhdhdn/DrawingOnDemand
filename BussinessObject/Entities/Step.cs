@@ -13,7 +13,7 @@ namespace BusinessObject.Entities
         public DateTime CreatedDate { get; set; }
         public DateTime? CompletedDate { get; set; }
         public string Status { get; set; } = null!;
-        public Guid RequirementId { get; set; }
+        public Guid? RequirementId { get; set; }
 
         public virtual Requirement? Requirement { get; set; }
     }
