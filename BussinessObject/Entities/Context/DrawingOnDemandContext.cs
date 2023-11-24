@@ -242,6 +242,10 @@ namespace BusinessObject.Entities.Context
 
                 entity.Property(e => e.Image).IsUnicode(false);
 
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .IsUnicode(true);
+
                 entity.HasOne(d => d.Account)
                     .WithMany(p => p.Certificates)
                     .HasForeignKey(d => d.AccountId)
