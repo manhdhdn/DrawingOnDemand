@@ -27,10 +27,11 @@ namespace BusinessObject.Entities
         public string? Avatar { get; set; }
         public string? Address { get; set; }
         public string? Bio { get; set; }
+        public int? AvailableConnect { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string Status { get; set; } = null!;
-        public Guid RankId { get; set; }
+        public Guid? RankId { get; set; }
 
         public virtual Rank? Rank { get; set; }
         public virtual ICollection<AccountReview> AccountReviewAccounts { get; set; }

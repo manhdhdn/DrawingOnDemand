@@ -20,11 +20,11 @@ namespace BusinessObject.Entities
         public double Fee { get; set; }
         public string Status { get; set; } = null!;
         public decimal Total { get; set; }
-        public Guid Orderedby { get; set; }
-        public Guid DiscountId { get; set; }
+        public Guid? Orderedby { get; set; }
+        public Guid? DiscountId { get; set; }
 
         public virtual Discount? Discount { get; set; }
-        public virtual Account? OrderedbyNavigation { get; set; } 
+        public virtual Account? OrderedbyNavigation { get; set; }
         public virtual ICollection<HandOver> HandOvers { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<Payment> Payments { get; set; }

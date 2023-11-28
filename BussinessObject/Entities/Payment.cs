@@ -10,7 +10,7 @@ namespace BusinessObject.Entities
         public string Signature { get; set; } = null!;
         public string? TranferContent { get; set; }
         public string Status { get; set; } = null!;
-        public Guid OrderId { get; set; }
+        public Guid? OrderId { get; set; }
 
         public virtual Order? Order { get; set; }
     }
