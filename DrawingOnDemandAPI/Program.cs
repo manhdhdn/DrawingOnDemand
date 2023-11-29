@@ -43,19 +43,30 @@ builder.Services.AddSingleton(FirebaseApp.Create(new AppOptions()
 builder.Services.AddFirebaseAuthentication();
 builder.Services.AddAuthorization();
 
+// Cors
+var corsPolicy = "corsPolicy";
+builder.Services.AddCors(option =>
+{
+    option.AddPolicy(corsPolicy, builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseSwagger();
+app.UseSwaggerUI();
 //}
 
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors(corsPolicy);
 
 app.MapControllers();
 
