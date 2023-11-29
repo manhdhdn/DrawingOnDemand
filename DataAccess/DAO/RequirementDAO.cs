@@ -16,7 +16,7 @@ namespace DataAccess.DAO
 
                 listRequirement = context.Requirements
                     .Include(r => r.Category)
-                    .Include(r => r.CreatedBy)
+                    .Include(r => r.CreatedByNavigation)
                     .ToList();
             }
             catch (Exception ex)
@@ -39,7 +39,7 @@ namespace DataAccess.DAO
                     .Include(r => r.Category)
                     .Include(r => r.Surface)
                     .Include(r => r.Material)
-                    .Include(r => r.CreatedBy)
+                    .Include(r => r.CreatedByNavigation)
                     .Include(r => r.Proposals)
                     .Include(r => r.Sizes)
                     .Include(r => r.Steps)
