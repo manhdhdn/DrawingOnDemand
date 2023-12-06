@@ -18,9 +18,6 @@ namespace DataAccess.DAO
                     .Include(aw => aw.Arts)
                     .Include(aw => aw.CreatedByNavigation).ThenInclude(a => a!.Rank)
                     .Include(aw => aw.ArtworkReviews)
-                    .Include(aw => aw.Category)
-                    .Include(aw => aw.Material)
-                    .Include(aw => aw.Surface)
                     .ToList();
             }
             catch (Exception ex)

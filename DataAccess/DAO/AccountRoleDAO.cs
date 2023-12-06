@@ -15,7 +15,8 @@ namespace DataAccess.DAO
                 using var context = new DrawingOnDemandContext();
 
                 listAccountRole = context.AccountRoles
-                    .Include(ar => ar.Account)
+                    .Include(ar => ar.Account).ThenInclude(a => a!.AccountReviewAccounts)
+                    .Include(ar => ar.Account).ThenInclude(a => a!.Rank)
                     .Include(ar => ar.Role)
                     .ToList();
             }
