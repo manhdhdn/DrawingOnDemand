@@ -40,6 +40,9 @@ namespace DataAccess.DAO
                     .Include(aw => aw.Arts)
                     .Include(aw => aw.CreatedByNavigation).ThenInclude(a => a!.Rank)
                     .Include(aw => aw.ArtworkReviews).ThenInclude(ar => ar.CreatedByNavigation)
+                    .Include(aw => aw.Category)
+                    .Include(aw => aw.Surface)
+                    .Include(aw => aw.Material)
                     .Single(aw => aw.Id == id);
             }
             catch (Exception ex)
