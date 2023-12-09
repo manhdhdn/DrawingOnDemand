@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace EZCake.Utils
+namespace DrawingOnDemandAPI.Utils
 {
     public class ClaimRequirementAttribute : TypeFilterAttribute
     {

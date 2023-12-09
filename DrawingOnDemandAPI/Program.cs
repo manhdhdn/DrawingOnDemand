@@ -1,5 +1,6 @@
 using BusinessObject.Entities;
 using DrawingOnDemandAPI.Utils;
+using DrawingOnDemandAPI.VNPay.Models;
 using FirebaseAdmin;
 using FirebaseAdminAuthentication.DependencyInjection.Extensions;
 using Google.Apis.Auth.OAuth2;
@@ -13,12 +14,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+// Add OData
 builder.Services.AddControllers()
     .AddOData(options =>
     {
         options.EnableQueryFeatures();
         options.AddRouteComponents("OData", GetEdmModel());
-    }); ;
+    });
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -98,5 +101,6 @@ static IEdmModel GetEdmModel()
     odataBuilder.EntitySet<Size>("Sizes");
     odataBuilder.EntitySet<Step>("Steps");
     odataBuilder.EntitySet<Surface>("Surfaces");
+    odataBuilder.EntitySet<VNPayRequest>("VNPay");
     return odataBuilder.GetEdmModel();
 }

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace EZCake.Utils
+namespace DrawingOnDemandAPI.Utils
 {
     public class ClaimRequirementFilter : IAuthorizationFilter
     {
