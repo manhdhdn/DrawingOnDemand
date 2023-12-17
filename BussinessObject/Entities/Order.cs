@@ -19,7 +19,7 @@ namespace BusinessObject.Entities
         public DateTime? CompletedDate { get; set; }
         public string Status { get; set; } = null!;
         public decimal Total { get; set; }
-        public Guid? Orderedby { get; set; }
+        public Guid? OrderedBy { get; set; }
         public Guid? DiscountId { get; set; }
 
         public virtual Discount? Discount { get; set; }
