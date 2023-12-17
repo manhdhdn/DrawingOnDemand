@@ -7,7 +7,6 @@ namespace BusinessObject.Entities
     {
         public Guid Id { get; set; }
         public string Introduction { get; set; } = null!;
-        public decimal Cost { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string Status { get; set; } = null!;

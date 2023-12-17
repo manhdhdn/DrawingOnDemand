@@ -8,6 +8,7 @@ namespace BusinessObject.Entities
         public Guid Id { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
+        public double Fee { get; set; }
         public Guid? ArtworkId { get; set; }
         public Guid? OrderId { get; set; }
 

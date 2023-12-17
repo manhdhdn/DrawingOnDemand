@@ -17,7 +17,6 @@ namespace BusinessObject.Entities
         public DateTime OrderDate { get; set; }
         public DateTime? DepositDate { get; set; }
         public DateTime? CompletedDate { get; set; }
-        public double Fee { get; set; }
         public string Status { get; set; } = null!;
         public decimal Total { get; set; }
         public Guid? Orderedby { get; set; }

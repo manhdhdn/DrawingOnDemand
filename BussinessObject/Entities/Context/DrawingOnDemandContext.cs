@@ -242,9 +242,7 @@ namespace BusinessObject.Entities.Context
 
                 entity.Property(e => e.Image).IsUnicode(false);
 
-                entity.Property(e => e.Name)
-                    .HasMaxLength(50)
-                    .IsUnicode(true);
+                entity.Property(e => e.Name).HasMaxLength(50);
 
                 entity.HasOne(d => d.Account)
                     .WithMany(p => p.Certificates)
@@ -324,15 +322,7 @@ namespace BusinessObject.Entities.Context
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.Cost).HasColumnType("decimal(18, 0)");
-
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.MeetingDate).HasColumnType("datetime");
-
-                entity.Property(e => e.MeetingLink).IsUnicode(false);
-
-                entity.Property(e => e.Record).IsUnicode(false);
 
                 entity.Property(e => e.Status)
                     .HasMaxLength(20)
@@ -440,8 +430,6 @@ namespace BusinessObject.Entities.Context
                 entity.HasIndex(e => e.Id, "IX_Proposals_1");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.Cost).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 

@@ -6,10 +6,6 @@ namespace BusinessObject.Entities
     public partial class Invite
     {
         public Guid Id { get; set; }
-        public decimal Cost { get; set; }
-        public string MeetingLink { get; set; } = null!;
-        public DateTime MeetingDate { get; set; }
-        public string? Record { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Status { get; set; } = null!;
         public Guid? ReceivedBy { get; set; }
