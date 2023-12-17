@@ -14,7 +14,10 @@ namespace DataAccess.DAO
             {
                 using var context = new DrawingOnDemandContext();
 
-                listOrder = context.Orders.ToList();
+                listOrder = context.Orders
+                    .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.Arts)
+                    .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.CreatedByNavigation)
+                    .ToList();
             }
             catch (Exception ex)
             {
@@ -32,7 +35,10 @@ namespace DataAccess.DAO
             {
                 using var context = new DrawingOnDemandContext();
 
-                order = context.Orders.Find(id)!;
+                order = context.Orders
+                    .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.Arts)
+                    .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.CreatedByNavigation)
+                    .Single(o => o.Id == id);
             }
             catch (Exception ex)
             {

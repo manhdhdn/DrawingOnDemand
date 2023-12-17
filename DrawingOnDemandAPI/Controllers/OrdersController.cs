@@ -14,11 +14,11 @@ namespace DrawingOnDemandAPI.Controllers
         private readonly IOrderRepository repository = new OrderRepository();
 
         // GET /OData/Orders
-        [EnableQuery]
+        [EnableQuery(MaxExpansionDepth = 3)]
         public IQueryable<Order> Get() => repository.GetOrders().AsQueryable();
 
         // GET /OData/Orders(5)
-        [EnableQuery]
+        [EnableQuery(MaxExpansionDepth = 3)]
         public SingleResult<Order> Get([FromRoute] Guid key) => SingleResult.Create(new[] { repository.GetOrder(key) }.AsQueryable());
 
         // POST /OData/Orders
