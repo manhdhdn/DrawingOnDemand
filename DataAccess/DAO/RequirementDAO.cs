@@ -43,7 +43,7 @@ namespace DataAccess.DAO
                     .Include(r => r.Proposals)
                     .Include(r => r.Sizes)
                     .Include(r => r.Steps)
-                    .Single(r => r.Id == id)!;
+                    .SingleOrDefault(r => r.Id == id)!;
             }
             catch (Exception ex)
             {

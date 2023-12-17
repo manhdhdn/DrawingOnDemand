@@ -38,7 +38,7 @@ namespace DataAccess.DAO
                 order = context.Orders
                     .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.Arts)
                     .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.CreatedByNavigation)
-                    .Single(o => o.Id == id);
+                    .SingleOrDefault(o => o.Id == id)!;
             }
             catch (Exception ex)
             {

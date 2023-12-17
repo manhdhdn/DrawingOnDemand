@@ -41,7 +41,7 @@ namespace DataAccess.DAO
                     .Include(a => a.AccountReviewAccounts).ThenInclude(ar => ar.CreatedByNavigation)
                     .Include(a => a.Artworks)
                     .Include(a => a.Certificates)
-                    .Single(a => a.Id == id);
+                    .SingleOrDefault(a => a.Id == id)!;
             }
             catch (Exception ex)
             {

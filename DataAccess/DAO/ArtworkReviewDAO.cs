@@ -38,7 +38,7 @@ namespace DataAccess.DAO
                 artworkReview = context.ArtworkReviews
                     .Include(ar => ar.Artwork)
                     .Include(ar => ar.CreatedByNavigation)
-                    .Single(ar => ar.Id == id);
+                    .SingleOrDefault(ar => ar.Id == id)!;
             }
             catch (Exception ex)
             {

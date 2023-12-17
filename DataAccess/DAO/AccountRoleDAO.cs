@@ -39,7 +39,7 @@ namespace DataAccess.DAO
                 accountRole = context.AccountRoles
                     .Include(ar => ar.Account)
                     .Include(ar => ar.Role)
-                    .Single(ar => ar.Id == id);
+                    .SingleOrDefault(ar => ar.Id == id)!;
             }
             catch (Exception ex)
             {

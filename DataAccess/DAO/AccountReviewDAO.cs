@@ -38,7 +38,7 @@ namespace DataAccess.DAO
                 accountReview = context.AccountReviews
                     .Include(ar => ar.Account)
                     .Include(ar => ar.CreatedByNavigation)
-                    .Single(ar => ar.Id == id);
+                    .SingleOrDefault(ar => ar.Id == id)!;
             }
             catch (Exception ex)
             {
