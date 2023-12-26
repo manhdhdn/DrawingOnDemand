@@ -1,20 +1,21 @@
-﻿using DrawingOnDemandAPI.VNPay;
-using DrawingOnDemandAPI.VNPay.Models;
+﻿using DrawingOnDemandAPI.GHN;
+using DrawingOnDemandAPI.GHN.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace DrawingOnDemandAPI.Controllers
 {
-    public class VNPayController : ODataController
+    public class GHNController : ODataController
     {
-        public IActionResult Post([FromBody] VNPayRequest request)
+        public async Task<IActionResult> PostAsync([FromBody] GHNRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            return Created(Payment.Send(request, HttpContext));
+            return Created(await Order.Send(request));
         }
+
     }
 }

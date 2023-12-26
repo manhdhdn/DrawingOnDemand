@@ -1,4 +1,5 @@
 using BusinessObject.Entities;
+using DrawingOnDemandAPI.GHN.Models;
 using DrawingOnDemandAPI.Utils;
 using DrawingOnDemandAPI.VNPay.Models;
 using FirebaseAdmin;
@@ -102,5 +103,6 @@ static IEdmModel GetEdmModel()
     odataBuilder.EntitySet<Step>("Steps");
     odataBuilder.EntitySet<Surface>("Surfaces");
     odataBuilder.EntitySet<VNPayRequest>("VNPay");
+    odataBuilder.EntitySet<GHNRequest>("GHN");
     return odataBuilder.GetEdmModel();
 }
