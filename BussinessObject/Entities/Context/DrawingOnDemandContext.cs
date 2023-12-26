@@ -163,7 +163,7 @@ namespace BusinessObject.Entities.Context
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Description).HasMaxLength(300);
+                entity.Property(e => e.Description).HasMaxLength(700);
 
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
 
@@ -479,7 +479,7 @@ namespace BusinessObject.Entities.Context
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Description).HasMaxLength(300);
+                entity.Property(e => e.Description).HasMaxLength(700);
 
                 entity.Property(e => e.Image).IsUnicode(false);
 
