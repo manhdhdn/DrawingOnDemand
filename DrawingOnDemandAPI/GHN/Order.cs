@@ -38,6 +38,7 @@ namespace DrawingOnDemandAPI.GHN
                 response.EnsureSuccessStatusCode();
 
                 request.PostJsonString = await response.Content.ReadAsStringAsync();
+                request.PostJsonString = request.PostJsonString.Remove(request.PostJsonString.Length - 1);
 
                 // Todo parse it
                 return request;
