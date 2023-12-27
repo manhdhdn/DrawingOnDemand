@@ -16,6 +16,7 @@ namespace DataAccess.DAO
 
                 listOrder = context.Orders
                     .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.Arts)
+                    .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.Sizes)
                     .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.CreatedByNavigation)
                     .ToList();
             }
@@ -37,6 +38,7 @@ namespace DataAccess.DAO
 
                 order = context.Orders
                     .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.Arts)
+                    .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.Sizes)
                     .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.CreatedByNavigation)
                     .SingleOrDefault(o => o.Id == id)!;
             }

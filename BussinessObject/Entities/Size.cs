@@ -6,8 +6,9 @@ namespace BusinessObject.Entities
     public partial class Size
     {
         public Guid Id { get; set; }
-        public double Width { get; set; }
-        public double Length { get; set; }
+        public int Width { get; set; }
+        public int Length { get; set; }
+        public int Weight { get; set; }
         public Guid? RequirementId { get; set; }
         public Guid? ArtworkId { get; set; }
 
