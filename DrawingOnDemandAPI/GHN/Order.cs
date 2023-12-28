@@ -35,7 +35,7 @@ namespace DrawingOnDemandAPI.GHN
 
                 HttpResponseMessage response = await httpClient.PostAsync(request.Endpoint, postData);
 
-                response.EnsureSuccessStatusCode();
+                //response.EnsureSuccessStatusCode();
 
                 request.PostJsonString = await response.Content.ReadAsStringAsync();
                 request.PostJsonString = request.PostJsonString.Remove(request.PostJsonString.Length - 1);
