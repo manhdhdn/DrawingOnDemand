@@ -17,6 +17,7 @@ namespace BusinessObject.Entities
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
         public string? Image { get; set; }
+        public int Quantity { get; set; }
         public int Pieces { get; set; }
         public decimal Budget { get; set; }
         public DateTime CreatedDate { get; set; }
