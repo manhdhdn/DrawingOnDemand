@@ -18,6 +18,7 @@ namespace DataAccess.DAO
                     .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.Arts)
                     .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.Sizes)
                     .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.CreatedByNavigation)
+                    .Include(o => o.Discount)
                     .ToList();
             }
             catch (Exception ex)
@@ -40,6 +41,7 @@ namespace DataAccess.DAO
                     .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.Arts)
                     .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.Sizes)
                     .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.CreatedByNavigation)
+                    .Include(o => o.Discount)
                     .SingleOrDefault(o => o.Id == id)!;
             }
             catch (Exception ex)
