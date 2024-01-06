@@ -14,7 +14,10 @@ namespace DataAccess.DAO
             {
                 using var context = new DrawingOnDemandContext();
 
-                listInvite = context.Invites.ToList();
+                listInvite = context.Invites
+                    .Include(i => i.Requirement).ThenInclude(r => r!.Category)
+                    .Include(i => i.Requirement).ThenInclude(r => r!.CreatedByNavigation)
+                    .ToList();
             }
             catch (Exception ex)
             {
@@ -32,7 +35,13 @@ namespace DataAccess.DAO
             {
                 using var context = new DrawingOnDemandContext();
 
-                invite = context.Invites.Find(id)!;
+                invite = context.Invites
+                    .Include(i => i.Requirement).ThenInclude(r => r!.Category)
+                    .Include(i => i.Requirement).ThenInclude(r => r!.Surface)
+                    .Include(i => i.Requirement).ThenInclude(r => r!.Material)
+                    .Include(i => i.Requirement).ThenInclude(r => r!.CreatedByNavigation)
+                    .Include(i => i.Requirement).ThenInclude(r => r!.Sizes)
+                    .SingleOrDefault(i => i.Id == id)!;
             }
             catch (Exception ex)
             {

@@ -173,7 +173,7 @@ namespace BusinessObject.Entities.Context
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Title).HasMaxLength(100);
+                entity.Property(e => e.Title).HasMaxLength(60);
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Artworks)
@@ -489,7 +489,7 @@ namespace BusinessObject.Entities.Context
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Title).HasMaxLength(100);
+                entity.Property(e => e.Title).HasMaxLength(60);
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Requirements)
