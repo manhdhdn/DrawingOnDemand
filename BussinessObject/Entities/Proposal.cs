@@ -16,6 +16,6 @@ namespace BusinessObject.Entities
 
         public virtual Artwork? Artword { get; set; }
         public virtual Account? CreatedByNavigation { get; set; }
-        public virtual Requirement? Requirement { get; set; };
+        public virtual Requirement? Requirement { get; set; }
     }
 }
