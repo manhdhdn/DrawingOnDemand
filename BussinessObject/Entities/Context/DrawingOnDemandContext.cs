@@ -422,7 +422,7 @@ namespace BusinessObject.Entities.Context
 
             modelBuilder.Entity<Proposal>(entity =>
             {
-                entity.HasIndex(e => e.ArtwordId, "IX_Proposals")
+                entity.HasIndex(e => e.ArtworkId, "IX_Proposals")
                     .IsUnique();
 
                 entity.HasIndex(e => e.Id, "IX_Proposals_1");
@@ -441,7 +441,7 @@ namespace BusinessObject.Entities.Context
 
                 entity.HasOne(d => d.Artword)
                     .WithOne(p => p.Proposal)
-                    .HasForeignKey<Proposal>(d => d.ArtwordId)
+                    .HasForeignKey<Proposal>(d => d.ArtworkId)
                     .HasConstraintName("FK_Proposals_Artworks");
 
                 entity.HasOne(d => d.CreatedByNavigation)
@@ -452,7 +452,6 @@ namespace BusinessObject.Entities.Context
                 entity.HasOne(d => d.Requirement)
                     .WithMany(p => p.Proposals)
                     .HasForeignKey(d => d.RequirementId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Proposals_Requirements");
             });
 

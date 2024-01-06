@@ -12,7 +12,7 @@ namespace BusinessObject.Entities
         public string Status { get; set; } = null!;
         public Guid? RequirementId { get; set; }
         public Guid? CreatedBy { get; set; }
-        public Guid? ArtwordId { get; set; }
+        public Guid? ArtworkId { get; set; }
 
         public virtual Artwork? Artword { get; set; }
         public virtual Account? CreatedByNavigation { get; set; }
