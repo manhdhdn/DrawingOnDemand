@@ -41,7 +41,7 @@ namespace DataAccess.DAO
                     .Include(r => r.Surface)
                     .Include(r => r.Material)
                     .Include(r => r.CreatedByNavigation)
-                    .Include(r => r.Proposals).ThenInclude(p => p.CreatedByNavigation)
+                    .Include(r => r.Proposals).ThenInclude(p => p.CreatedByNavigation).ThenInclude(a => a!.Rank)
                     .Include(r => r.Proposals).ThenInclude(p => p.Artwork).ThenInclude(aw => aw!.Arts)
                     .Include(r => r.Sizes)
                     .Include(r => r.Steps)
