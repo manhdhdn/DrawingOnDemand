@@ -42,6 +42,7 @@ namespace DataAccess.DAO
                     .Include(r => r.Material)
                     .Include(r => r.CreatedByNavigation)
                     .Include(r => r.Proposals).ThenInclude(p => p.CreatedByNavigation)
+                    .Include(r => r.Proposals).ThenInclude(p => p.Artword)
                     .Include(r => r.Sizes)
                     .Include(r => r.Steps)
                     .SingleOrDefault(r => r.Id == id)!;
