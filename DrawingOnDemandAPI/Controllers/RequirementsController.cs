@@ -18,7 +18,7 @@ namespace DrawingOnDemandAPI.Controllers
         public IQueryable<Requirement> Get() => repository.GetRequirements().AsQueryable();
 
         // GET /OData/Requirements(5)
-        [EnableQuery]
+        [EnableQuery(MaxExpansionDepth = 3)]
         public SingleResult<Requirement> Get([FromRoute] Guid key) => SingleResult.Create(new[] { repository.GetRequirement(key) }.AsQueryable());
 
         // POST /OData/Requirements

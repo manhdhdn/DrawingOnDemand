@@ -14,7 +14,7 @@ namespace BusinessObject.Entities
         public Guid? CreatedBy { get; set; }
         public Guid? ArtworkId { get; set; }
 
-        public virtual Artwork? Artword { get; set; }
+        public virtual Artwork? Artwork { get; set; }
         public virtual Account? CreatedByNavigation { get; set; }
         public virtual Requirement? Requirement { get; set; }
     }

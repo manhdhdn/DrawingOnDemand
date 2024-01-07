@@ -439,7 +439,7 @@ namespace BusinessObject.Entities.Context
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.Artword)
+                entity.HasOne(d => d.Artwork)
                     .WithOne(p => p.Proposal)
                     .HasForeignKey<Proposal>(d => d.ArtworkId)
                     .HasConstraintName("FK_Proposals_Artworks");
