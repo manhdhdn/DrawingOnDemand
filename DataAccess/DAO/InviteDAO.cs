@@ -17,6 +17,7 @@ namespace DataAccess.DAO
                 listInvite = context.Invites
                     .Include(i => i.Requirement).ThenInclude(r => r!.Category)
                     .Include(i => i.Requirement).ThenInclude(r => r!.CreatedByNavigation)
+                    .Include(i => i.Requirement).ThenInclude(r => r!.Proposals)
                     .ToList();
             }
             catch (Exception ex)

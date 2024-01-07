@@ -17,6 +17,7 @@ namespace DataAccess.DAO
                 listRequirement = context.Requirements
                     .Include(r => r.Category)
                     .Include(r => r.CreatedByNavigation)
+                    .Include(r => r.Proposals)
                     .ToList();
             }
             catch (Exception ex)
