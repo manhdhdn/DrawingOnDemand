@@ -19,6 +19,7 @@ namespace DataAccess.DAO
                     .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.Sizes)
                     .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.CreatedByNavigation)
                     .Include(o => o.Discount)
+                    .Include(o => o.Account)
                     .ToList();
             }
             catch (Exception ex)
