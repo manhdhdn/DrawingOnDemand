@@ -6,7 +6,7 @@ namespace DataAccess.DAO
 {
     public class ArtworkDAO
     {
-        public static async List<Artwork> GetArtworks()
+        public static List<Artwork> GetArtworks()
         {
             var listArtwork = new List<Artwork>();
 
