@@ -23,7 +23,7 @@ namespace BusinessObject.Entities
         public Guid? DiscountId { get; set; }
 
         public virtual Discount? Discount { get; set; }
-        public virtual Account? OrderedbyNavigation { get; set; }
+        public virtual Account? OrderedByNavigation { get; set; }
         public virtual ICollection<HandOver> HandOvers { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<Payment> Payments { get; set; }

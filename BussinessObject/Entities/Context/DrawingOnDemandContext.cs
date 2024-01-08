@@ -371,7 +371,7 @@ namespace BusinessObject.Entities.Context
                     .HasForeignKey(d => d.DiscountId)
                     .HasConstraintName("FK_Orders_Discounts");
 
-                entity.HasOne(d => d.OrderedbyNavigation)
+                entity.HasOne(d => d.OrderedByNavigation)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.OrderedBy)
                     .HasConstraintName("FK_Orders_Accounts");

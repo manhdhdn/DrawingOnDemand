@@ -44,6 +44,7 @@ namespace DataAccess.DAO
                     .Include(aw => aw.Category)
                     .Include(aw => aw.Surface)
                     .Include(aw => aw.Material)
+                    .Include(aw => aw.Sizes)
                     .SingleOrDefault(aw => aw.Id == id)!;
             }
             catch (Exception ex)
