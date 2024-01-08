@@ -19,7 +19,7 @@ namespace DataAccess.DAO
                     .Include(a => a.AccountReviewAccounts)
                     .Include(a => a.AccountRoles).ThenInclude(ar => ar.Role)
                     .Include(a => a.Orders)
-                    .Include(a => a.Artworks)
+                    .Include(a => a.Artworks).ThenInclude(aw => aw.OrderDetails)
                     .ToList();
             }
             catch (Exception ex)
