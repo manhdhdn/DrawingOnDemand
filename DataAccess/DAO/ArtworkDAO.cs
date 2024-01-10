@@ -6,7 +6,7 @@ namespace DataAccess.DAO
 {
     public class ArtworkDAO
     {
-        public static async List<Artwork> GetArtworks()
+        public static List<Artwork> GetArtworks()
         {
             var listArtwork = new List<Artwork>();
 
@@ -45,6 +45,7 @@ namespace DataAccess.DAO
                     .Include(aw => aw.Category)
                     .Include(aw => aw.Surface)
                     .Include(aw => aw.Material)
+                    .Include(aw => aw.Sizes)
                     .SingleOrDefault(aw => aw.Id == id)!;
             }
             catch (Exception ex)
