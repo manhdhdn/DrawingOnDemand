@@ -42,6 +42,7 @@ namespace DataAccess.DAO
                     .Include(a => a.Rank)
                     .Include(a => a.AccountReviewAccounts).ThenInclude(ar => ar.CreatedByNavigation)
                     .Include(a => a.Artworks)
+                    .Include(a => a.AccountRoles).ThenInclude(ar => ar.Role)
                     .Include(a => a.Certificates)
                     .SingleOrDefault(a => a.Id == id)!;
             }
