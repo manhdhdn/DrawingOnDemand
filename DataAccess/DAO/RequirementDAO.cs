@@ -17,6 +17,8 @@ namespace DataAccess.DAO
                 listRequirement = context.Requirements
                     .Include(r => r.Category)
                     .Include(r => r.CreatedByNavigation)
+                    .Include(r => r.Material)
+                    .Include(r => r.Surface)
                     .Include(r => r.Proposals).ThenInclude(p => p.Artwork).ThenInclude(aw => aw!.Arts)
                     .Include(r => r.Proposals).ThenInclude(p => p.CreatedByNavigation)
                     .ToList();
