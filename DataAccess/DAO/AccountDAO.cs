@@ -45,6 +45,7 @@ namespace DataAccess.DAO
                     .Include(a => a.Artworks).ThenInclude(aw => aw.Category)
                     .Include(a => a.AccountRoles).ThenInclude(ar => ar.Role)
                     .Include(a => a.Certificates)
+                    .Include(a => a.Requirements)
                     .SingleOrDefault(a => a.Id == id)!;
             }
             catch (Exception ex)
