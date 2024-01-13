@@ -18,6 +18,7 @@ namespace DataAccess.DAO
                     .Include(r => r.Category)
                     .Include(r => r.CreatedByNavigation)
                     .Include(r => r.Proposals).ThenInclude(p => p.Artwork).ThenInclude(aw => aw!.Arts)
+                    .Include(r => r.Proposals).ThenInclude(p => p.CreatedByNavigation)
                     .ToList();
             }
             catch (Exception ex)
