@@ -43,6 +43,7 @@ namespace DataAccess.DAO
                     .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.Sizes)
                     .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.CreatedByNavigation)
                     .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.Proposal).ThenInclude(p => p!.Requirement).ThenInclude(r => r!.Steps)
+                    .Include(o => o.OrderDetails).ThenInclude(od => od.HandOverItem)
                     .Include(o => o.Discount)
                     .Include(o => o.OrderedByNavigation)
                     .Include(o => o.HandOvers).ThenInclude(ho => ho.HandOverItems).ThenInclude(hoi => hoi.OrderDetail).ThenInclude(od => od!.Artwork).ThenInclude(aw => aw!.Arts)

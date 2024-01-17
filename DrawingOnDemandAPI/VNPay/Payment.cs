@@ -64,7 +64,7 @@ namespace DrawingOnDemandAPI.VNPay
             return request;
         }
 
-        public static bool Query(NameValueCollection queryString)
+        public static bool CheckPayment(NameValueCollection queryString)
         {
             if (queryString.Count > 0)
             {
@@ -105,5 +105,7 @@ namespace DrawingOnDemandAPI.VNPay
 
             return false;
         }
+    
+        
     }
 }
