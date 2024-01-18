@@ -20,6 +20,7 @@ namespace DataAccess.DAO
                     .Include(o => o.OrderDetails).ThenInclude(od => od.Artwork).ThenInclude(aw => aw!.CreatedByNavigation)
                     .Include(o => o.Discount)
                     .Include(o => o.OrderedByNavigation)
+                    .Include(o => o.Payments)
                     .ToList();
             }
             catch (Exception ex)
@@ -46,6 +47,7 @@ namespace DataAccess.DAO
                     .Include(o => o.OrderDetails).ThenInclude(od => od.HandOverItem)
                     .Include(o => o.Discount)
                     .Include(o => o.OrderedByNavigation)
+                    .Include(o => o.Payments)
                     .Include(o => o.HandOvers).ThenInclude(ho => ho.HandOverItems).ThenInclude(hoi => hoi.OrderDetail).ThenInclude(od => od!.Artwork).ThenInclude(aw => aw!.Arts)
                     .SingleOrDefault(o => o.Id == id)!;
             }
