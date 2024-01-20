@@ -1,6 +1,8 @@
 ﻿using BusinessObject.Entities;
 using DataAccess.IRepository;
 using DataAccess.Repository;
+using DrawingOnDemandAPI.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Deltas;
 using Microsoft.AspNetCore.OData.Query;
@@ -9,6 +11,7 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace DrawingOnDemandAPI.Controllers
 {
+    [Authorize]
     public class ProposalsController : ODataController
     {
         private readonly IProposalRepository repository = new ProposalRepository();
@@ -22,6 +25,7 @@ namespace DrawingOnDemandAPI.Controllers
         public SingleResult<Proposal> Get([FromRoute] Guid key) => SingleResult.Create(new[] { repository.GetProposal(key) }.AsQueryable());
 
         // POST /OData/Proposals
+        [ClaimRequirement("email", "Artist")]
         public IActionResult Post([FromBody] Proposal proposal)
         {
             if (!ModelState.IsValid)
@@ -83,6 +87,7 @@ namespace DrawingOnDemandAPI.Controllers
         }
 
         // DELETE /OData/Proposals(5)
+        [ClaimRequirement("email", "Artist")]
         public IActionResult Delete([FromRoute] Guid key)
         {
             if (!ModelState.IsValid)

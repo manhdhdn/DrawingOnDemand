@@ -1,6 +1,8 @@
 ﻿using BusinessObject.Entities;
 using DataAccess.IRepository;
 using DataAccess.Repository;
+using DrawingOnDemandAPI.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Deltas;
 using Microsoft.AspNetCore.OData.Query;
@@ -9,6 +11,7 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace DrawingOnDemandAPI.Controllers
 {
+    [Authorize]
     public class RequirementsController : ODataController
     {
         private readonly IRequirementRepository repository = new RequirementRepository();
@@ -22,6 +25,7 @@ namespace DrawingOnDemandAPI.Controllers
         public SingleResult<Requirement> Get([FromRoute] Guid key) => SingleResult.Create(new[] { repository.GetRequirement(key) }.AsQueryable());
 
         // POST /OData/Requirements
+        [ClaimRequirement("email", "Customer")]
         public IActionResult Post([FromBody] Requirement requirement)
         {
             if (!ModelState.IsValid)
@@ -83,6 +87,7 @@ namespace DrawingOnDemandAPI.Controllers
         }
 
         // DELETE /OData/Requirements(5)
+        [ClaimRequirement("email", "Customer")]
         public IActionResult Delete([FromRoute] Guid key)
         {
             if (!ModelState.IsValid)
